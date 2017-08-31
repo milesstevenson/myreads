@@ -4,13 +4,28 @@ import PropTypes from 'prop-types';
 
 
 class Bookshelf extends Component {
+
+  setupBooks() {
+    const books = this.props.books.map((b) => {
+      return (
+        <li>
+        <Book
+          book={ b }
+          shelfchange={ this.props.shelfchange }
+        />
+      </li>
+      )
+    });
+    return books;
+  }
+
   render() {
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{this.props.title}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            { this.props.books.map(b => <li> <Book book={ b } /> </li>) }
+            { this.setupBooks() }
           </ol>
         </div>
       </div>
@@ -20,7 +35,8 @@ class Bookshelf extends Component {
 
 Bookshelf.propTypes = {
   title: PropTypes.string.isRequired,
-  books: PropTypes.array.isRequired
+  books: PropTypes.array.isRequired,
+  shelfchange: PropTypes.func.isRequired
 };
 
 export default Bookshelf;

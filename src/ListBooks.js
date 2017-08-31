@@ -20,7 +20,13 @@ class ListBooks extends Component {
       this.setState({ currentlyReading });
       this.setState({ wantToRead });
       this.setState({ read });
-    })
+    });
+  }
+
+  changeShelves(book, shelf) {
+    BooksAPI.update(book, shelf).then((response) => {
+      console.log(response);
+    });
   }
 
   render() {
@@ -31,9 +37,18 @@ class ListBooks extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <Bookshelf title="Currently Reading" books={this.state.currentlyReading}/>
-            <Bookshelf title="Want to Read" books={this.state.wantToRead}/>
-            <Bookshelf title="Read" books={this.state.read}/>
+            <Bookshelf title="Currently Reading"
+                       books={this.state.currentlyReading}
+                       shelfchange={this.changeShelves.bind(this)}
+            />
+            <Bookshelf title="Want to Read"
+                       books={this.state.wantToRead}
+                       shelfchange={this.changeShelves.bind(this)}
+            />
+            <Bookshelf title="Read"
+                       books={this.state.read}
+                       shelfchange={this.changeShelves.bind(this)}
+            />
           </div>
         </div>
         <div className="open-search">

@@ -23,8 +23,8 @@ class Book extends Component {
         <div className="book-top">
           <div className="book-cover" style={ this.state.coverStyle }></div>
           <div className="book-shelf-changer">
-            <select ref={select => this.textSelect = select}>
-              <option value="none">Move to...</option>
+            <select ref={select => this.textSelect = select} onChange={ (e) => this.props.shelfchange(this.props.book, e.target.value)}>
+              <option value="none" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
               <option value="read">Read</option>
@@ -39,7 +39,8 @@ class Book extends Component {
 }
 
 Book.propTypes = {
-  book: PropTypes.object.isRequired
+  book: PropTypes.object.isRequired,
+  shelfchange: PropTypes.func.isRequired
 };
 
 export default Book;
