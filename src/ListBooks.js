@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Bookshelf from './Bookshelf';
 import * as BooksAPI from './BooksAPI';
+import PropTypes from 'prop-types';
 
 class ListBooks extends Component {
 
@@ -60,5 +61,9 @@ class ListBooks extends Component {
     )
   }
 }
+
+ListBooks.propTypes = {
+  click: PropTypes.func.isRequired
+};
 
 export default ListBooks

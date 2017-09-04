@@ -9,11 +9,16 @@ class BooksApp extends React.Component {
     books: []
   };
 
+  doSomething(book, shelf) {
+    console.log("Hey we're here");
+  }
+
   render() {
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-          <SearchBooks/>
+          <SearchBooks
+          click={() => this.setState({ showSearchPage: false })}/>
         ) : (
           <ListBooks
             click={() => this.setState({ showSearchPage: true })}/>

@@ -6,15 +6,16 @@ class Book extends Component {
     coverStyle: undefined,
   };
 
-  componentDidMount() {
-    Array.from(this.textSelect.children).find(child => child.value === this.props.book.shelf).disabled = true;
-  }
-
   componentWillMount() {
+    let thumbnail;
+    if (this.props.book && this.props.book.imageLinks.thumbnail)
+      thumbnail = this.props.book.imageLinks.thumbnail;
+    else
+      thumbnail = "https://books.google.ca/googlebooks/images/no_cover_thumb.gif";
     const coverStyle = {
       width: 128,
       height: 185,
-      backgroundImage: `url(${ this.props.book.imageLinks.thumbnail })`
+      backgroundImage: `url(${ thumbnail })`
     };
 
     this.setState({ coverStyle });
@@ -26,11 +27,12 @@ class Book extends Component {
         <div className="book-top">
           <div className="book-cover" style={ this.state.coverStyle }></div>
           <div className="book-shelf-changer">
-            <select ref={select => this.textSelect = select} onChange={ (e) => this.props.shelfchange(this.props.book, e.target.value)}>
-              <option value="none" disabled>Move to...</option>
+            <select onChange={ (e) => this.props.shelfchange(this.props.book, e.target.value)}>
+              <option value="none">Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
               <option value="read">Read</option>
+              <option value="none"> None </option>
             </select>
           </div>
         </div>
@@ -43,7 +45,7 @@ class Book extends Component {
 
 Book.propTypes = {
   book: PropTypes.object.isRequired,
-  shelfchange: PropTypes.func.isRequired
+  shelfchange: PropTypes.func
 };
 
 export default Book;

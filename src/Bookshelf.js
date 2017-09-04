@@ -8,7 +8,7 @@ class Bookshelf extends Component {
   setupBooks() {
     const books = this.props.books.map((b) => {
       return (
-        <li key={b.id}>
+        <li key={ b.id } >
         <Book
           book={ b }
           shelfchange={ this.props.shelfchange }
