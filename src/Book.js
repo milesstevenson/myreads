@@ -7,6 +7,10 @@ class Book extends Component {
   };
 
   componentDidMount() {
+    Array.from(this.textSelect.children).find(child => child.value === this.props.book.shelf).disabled = true;
+  }
+
+  componentWillMount() {
     const coverStyle = {
       width: 128,
       height: 185,
@@ -14,7 +18,6 @@ class Book extends Component {
     };
 
     this.setState({ coverStyle });
-    Array.from(this.textSelect.children).find(child => child.value === this.props.book.shelf).disabled = true;
   }
 
   render() {

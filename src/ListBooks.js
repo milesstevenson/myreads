@@ -16,16 +16,18 @@ class ListBooks extends Component {
       const currentlyReading = books.filter(book => book.shelf === "currentlyReading");
       const wantToRead = books.filter(book => book.shelf === "wantToRead");
       const read = books.filter(book => book.shelf === "read");
-      this.setState({ books });
-      this.setState({ currentlyReading });
-      this.setState({ wantToRead });
-      this.setState({ read });
+      this.setState({ books, currentlyReading, wantToRead, read });
     });
   }
 
   changeShelves(book, shelf) {
+    const self = this;
     BooksAPI.update(book, shelf).then((response) => {
-      console.log(response);
+      const { books } = self.state;
+      const currentlyReading = response.currentlyReading.map(id => books.find(book => book.id === id));
+      const wantToRead = response.wantToRead.map(id => books.find(book => book.id === id));
+      const read = response.read.map(id => books.find(book => book.id === id));
+      this.setState({ currentlyReading, wantToRead, read });
     });
   }
 
