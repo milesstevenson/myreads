@@ -13,15 +13,24 @@ class SearchBooks extends Component {
   updateQuery(query) {
     this.setState({ query: query.trim()});
     if (query.length > 0) {
-      BooksAPI.search(query, 20).then((books) => {
-        const displayBooks = books && !books.hasOwnProperty("error") ? books : [];
-        this.setState({displayBooks});
+      BooksAPI.search(query, 20).then((searchedBooks) => {
+        const displayBooks = searchedBooks && !searchedBooks.hasOwnProperty("error") ? searchedBooks : [];
+        BooksAPI.getAll().then((books) => {
+          for (const displayBook of displayBooks) {
+            const shelfBook = books.find(book => book.id === displayBook.id)
+            if (shelfBook)
+              displayBook.shelf = shelfBook.shelf;
+          }
+          this.setState({ displayBooks });
+        });
       });
     }
   }
 
   changeBookShelf(book, shelf) {
-    BooksAPI.update(book, shelf);
+    BooksAPI.update(book, shelf).then(() => {
+      BooksAPI.getAll().then(books => book.shelf = books.find(b => b.id === book.id).shelf);
+    });
   }
 
   render() {

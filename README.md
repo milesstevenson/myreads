@@ -1,8 +1,10 @@
 This is the first project of the Udacity React nanodegree program, a book management system, and was built on top of the starter code found [here](https://github.com/udacity/reactnd-project-myreads-starter).
 
 ## Installation
-This application was created with [`create-react-app`](https://github.com/facebookincubator/create-react-app). Once it is installed, all that will be required of the user is to run `npm install` and `npm start` in the myreads directory.
-You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+1. Clone this repository.
+2. Install the latest stable [nodejs](https://nodejs.org/en/).
+3. Navigate to your local cloned directory and install all dependencies with `npm install`.
+4. Start the development server with `npm start`.
 
 ## Backend Server
 
