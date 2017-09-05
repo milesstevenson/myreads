@@ -1,31 +1,22 @@
-import React from 'react'
-import SearchBooks from './SearchBooks'
-import ListBooks from './ListBooks'
+import React from 'react';
+import SearchBooks from './SearchBooks';
+import ListBooks from './ListBooks';
+import { Route } from 'react-router-dom';
 import './App.css'
 
-class BooksApp extends React.Component {
-  state = {
-    showSearchPage: false,
-    books: []
-  };
 
-  doSomething(book, shelf) {
-    console.log("Hey we're here");
-  }
-
-  render() {
-    return (
-      <div className="app">
-        {this.state.showSearchPage ? (
-          <SearchBooks
-          click={() => this.setState({ showSearchPage: false })}/>
-        ) : (
-          <ListBooks
-            click={() => this.setState({ showSearchPage: true })}/>
-        )}
-      </div>
-    )
-  }
+function BooksApp() {
+  return (
+    <div className="app">
+      <Route
+        exact path="/"
+        component={ListBooks}
+      />
+      <Route
+        path="/search"
+        component={SearchBooks}
+      />
+    </div>
+  )
 }
-
-export default BooksApp
+ export default BooksApp

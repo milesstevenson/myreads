@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Bookshelf from './Bookshelf';
 import * as BooksAPI from './BooksAPI';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class ListBooks extends Component {
 
@@ -42,28 +42,26 @@ class ListBooks extends Component {
           <div>
             <Bookshelf title="Currently Reading"
                        books={this.state.currentlyReading}
-                       shelfchange={this.changeShelves.bind(this)}
+                       shelfchange={ this.changeShelves.bind(this) }
             />
             <Bookshelf title="Want to Read"
-                       books={this.state.wantToRead}
-                       shelfchange={this.changeShelves.bind(this)}
+                       books={ this.state.wantToRead }
+                       shelfchange={ this.changeShelves.bind(this) }
             />
             <Bookshelf title="Read"
-                       books={this.state.read}
-                       shelfchange={this.changeShelves.bind(this)}
+                       books={ this.state.read }
+                       shelfchange={ this.changeShelves.bind(this) }
             />
           </div>
         </div>
         <div className="open-search">
-          <a onClick={this.props.click}>Add a book</a>
+          <Link to="/search">
+            Add a book
+          </Link>
         </div>
       </div>
     )
   }
 }
-
-ListBooks.propTypes = {
-  click: PropTypes.func.isRequired
-};
 
 export default ListBooks
