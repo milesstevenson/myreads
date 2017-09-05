@@ -22,9 +22,9 @@ class ListBooks extends Component {
   }
 
   changeShelves(book, shelf) {
-    const self = this;
+    const { books } = this.state;
     BooksAPI.update(book, shelf).then((response) => {
-      const { books } = self.state;
+      book.shelf = shelf;
       const currentlyReading = response.currentlyReading.map(id => books.find(book => book.id === id));
       const wantToRead = response.wantToRead.map(id => books.find(book => book.id === id));
       const read = response.read.map(id => books.find(book => book.id === id));

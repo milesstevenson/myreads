@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class Book extends Component {
   state = {
-    coverStyle: undefined,
+    image: undefined,
   };
 
   componentWillMount() {
@@ -12,22 +12,24 @@ class Book extends Component {
       thumbnail = this.props.book.imageLinks.thumbnail;
     else
       thumbnail = "https://books.google.ca/googlebooks/images/no_cover_thumb.gif";
-    const coverStyle = {
-      width: 128,
-      height: 185,
+    const image = {
       backgroundImage: `url(${ thumbnail })`
     };
 
-    this.setState({ coverStyle });
+    this.setState({ image });
   }
 
   render() {
+    const { book } = this.props;
+    const { shelf, title, authors } = book;
+
     return(
       <div className="book">
         <div className="book-top">
-          <div className="book-cover" style={ this.state.coverStyle }></div>
+          <div className="book-cover" style={ this.state.image }></div>
           <div className="book-shelf-changer">
-            <select onChange={ (e) => this.props.shelfchange(this.props.book, e.target.value)}>
+            <select value={ shelf }
+                    onChange={ (e) => this.props.shelfchange(book, e.target.value)}>
               <option value="none">Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
@@ -36,8 +38,8 @@ class Book extends Component {
             </select>
           </div>
         </div>
-        <div className="book-title">{ this.props.book.title }</div>
-        <div className="book-authors">{ this.props.book.authors }</div>
+        <div className="book-title">{ title }</div>
+        <div className="book-authors">{ authors ? authors.join(`,\n`) : ``}</div>
       </div>
     );
   }
